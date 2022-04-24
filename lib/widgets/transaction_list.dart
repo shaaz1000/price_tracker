@@ -16,7 +16,7 @@ class TransactionList extends StatelessWidget {
         itemBuilder: (ctx, index) {
 // provides 2 argument ctx and index
           return Card(
-            color: Colors.black,
+            color: Theme.of(context).primaryColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
@@ -28,13 +28,14 @@ class TransactionList extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.horizontal(
                         left: Radius.circular(10), right: Radius.circular(10)),
-                    border: Border.all(color: Colors.green.shade100, width: 2)),
+                    border: Border.all(
+                        color: Theme.of(context).primaryColorLight, width: 2)),
                 margin: const EdgeInsets.only(
                     bottom: 10, top: 10, right: 20, left: 30),
                 child: Text(
                   '\$ ${transactions[index].amount.toStringAsFixed(2)}',
                   style: TextStyle(
-                      color: Colors.green[100],
+                      color: Theme.of(context).secondaryHeaderColor,
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
                 ),
@@ -46,14 +47,15 @@ class TransactionList extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     child: Text(transactions[index].title,
                         style: TextStyle(
-                            color: Colors.green[100],
+                            color: Theme.of(context).selectedRowColor,
                             fontSize: 19,
                             fontWeight: FontWeight.bold)),
                   ),
                   Text(
                     DateFormat('dd-MM-yyyy-EE')
                         .format(transactions[index].date),
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Theme.of(context).secondaryHeaderColor),
                   ),
                 ],
               )

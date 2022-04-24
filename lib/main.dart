@@ -11,7 +11,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App',
+      title: 'Expense Tracker',
+      // theme -> global application theme -> global colors , texxt style , font sizes which can be used as default
+      theme: ThemeData(
+        // primarySwatch generates different shades of one color for
+        primarySwatch: Colors.orange,
+        selectedRowColor: Colors.black,
+        fontFamily: 'Quicksand',
+
+        secondaryHeaderColor: Colors.white,
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+              fontFamily: "Open Sans",
+              fontSize: 20,
+              fontWeight: FontWeight.bold),
+          // textTheme: ThemeData.light().textTheme.copyWith(
+          //     titleLarge:
+          //         const TextStyle(fontFamily: "Open Sans", fontSize: 40))
+        ),
+      ),
       home: MyHomePage(),
     );
   }
@@ -26,7 +44,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final List<Transaction> _userTransaction = [
     Transaction(
-        amount: 23.50, title: "New Shoes", id: "T1", date: DateTime.now()),
+        amount: 23.50, title: "New Shoes here", id: "T1", date: DateTime.now()),
     Transaction(
         amount: 16.50,
         title: "Weekly Groceries",
@@ -57,8 +75,9 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Expense Tracker'),
-        backgroundColor: Colors.black,
+        title: const Text(
+          'Expense Tracker',
+        ),
         actions: <Widget>[
           IconButton(
               onPressed: () => _startAddNewTransaction(context),
@@ -91,7 +110,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.green,
         child: const Icon(Icons.add),
         onPressed: () => _startAddNewTransaction(context),
       ),
