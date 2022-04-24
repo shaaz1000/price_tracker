@@ -16,6 +16,7 @@ class TransactionList extends StatelessWidget {
         itemBuilder: (ctx, index) {
 // provides 2 argument ctx and index
           return Card(
+            color: Colors.black,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),
             ),
@@ -23,17 +24,17 @@ class TransactionList extends StatelessWidget {
             margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Row(children: <Widget>[
               Container(
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.horizontal(
                         left: Radius.circular(10), right: Radius.circular(10)),
-                    border: Border.all(color: Colors.blue, width: 2)),
+                    border: Border.all(color: Colors.green.shade100, width: 2)),
                 margin: const EdgeInsets.only(
                     bottom: 10, top: 10, right: 20, left: 30),
                 child: Text(
-                  '\$ ${transactions[index].amount}',
-                  style: const TextStyle(
-                      color: Colors.deepOrange,
+                  '\$ ${transactions[index].amount.toStringAsFixed(2)}',
+                  style: TextStyle(
+                      color: Colors.green[100],
                       fontSize: 20,
                       fontWeight: FontWeight.bold),
                 ),
@@ -44,11 +45,16 @@ class TransactionList extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 5),
                     child: Text(transactions[index].title,
-                        style: const TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold)),
+                        style: TextStyle(
+                            color: Colors.green[100],
+                            fontSize: 19,
+                            fontWeight: FontWeight.bold)),
                   ),
-                  Text(DateFormat('dd-MM-yyyy-EE')
-                      .format(transactions[index].date)),
+                  Text(
+                    DateFormat('dd-MM-yyyy-EE')
+                        .format(transactions[index].date),
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ],
               )
             ]),
