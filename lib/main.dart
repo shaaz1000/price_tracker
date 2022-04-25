@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import './widgets/new_transaction.dart';
 import './models/transaction.dart';
 import './widgets/transaction_list.dart';
+import './widgets/chart.dart';
 
 void main() => runApp(const MyApp());
 
@@ -42,15 +43,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<Transaction> _userTransaction = [
-    Transaction(
-        amount: 23.50, title: "New Shoes here", id: "T1", date: DateTime.now()),
-    Transaction(
-        amount: 16.50,
-        title: "Weekly Groceries",
-        id: "T2",
-        date: DateTime.now()),
-  ];
+  final List<Transaction> _userTransaction = [];
+
+  List<Transaction> get _recentTransaction {
+    return _userTransaction.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          const Duration(days: 7),
+        ),
+      );
+    }).toList();
+  }
 
   void _addNewTransaction(String title, double amount) {
     final newTx = Transaction(
@@ -92,18 +95,19 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Card(
-              color: Colors.blue[50],
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Container(
-                width: double.infinity,
-                height: 50,
-                child: const Text('Chart hai re mein'),
-              ),
-              elevation: 10,
-            ),
+            // Card(
+            //   color: Colors.blue[50],
+            //   shape: RoundedRectangleBorder(
+            //     borderRadius: BorderRadius.circular(10),
+            //   ),
+            //   child: Container(
+            //     width: double.infinity,
+            //     height: 50,
+            //     child: const Text('Chart hai re mein'),
+            //   ),
+            //   elevation: 10,
+            // ),
+            Chart(_recentTransaction),
             TransactionList(_userTransaction),
           ],
         ),
